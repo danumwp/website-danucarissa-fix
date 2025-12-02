@@ -284,21 +284,57 @@ h1 {
     gap: 20px;
 }
 
+/* --- UPDATE STYLE PORTFOLIO (Agar Gambar Rapi) --- */
+
 .portfolio-item {
-    background-color: #333;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #777;
-    border-radius: 5px;
-    transition: 0.3s;
+    position: relative;      /* Penting agar teks overlay bisa menempel */
+    height: 250px;           /* Menentukan tinggi kotak */
+    border-radius: 15px;     /* Sudut membulat */
+    overflow: hidden;        /* Agar gambar tidak keluar dari sudut bulat */
+    cursor: pointer;         /* Ubah kursor jadi tangan saat ditunjuk */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Bayangan biar keren */
+    
+    /* Hapus settingan lama ini jika ada, agar gambar bisa full */
+    padding: 0; 
+    display: block; 
 }
 
-.portfolio-item:hover {
-    background-color: #00bcd4;
+/* Mengatur Gambar agar Full & Tidak Gepeng */
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       /* KUNCI RAHASIA: Memotong gambar otomatis biar pas */
+    transition: transform 0.5s ease; /* Efek zoom halus */
+}
+
+/* Efek Zoom saat Mouse Lewat */
+.portfolio-item:hover img {
+    transform: scale(1.1);   /* Gambar membesar dikit */
+}
+
+/* --- (Opsional) Teks Muncul Saat Hover --- */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); /* Gradasi hitam */
+    padding: 20px;
+    opacity: 0;             /* Sembunyi dulu */
+    transition: 0.3s;
+    transform: translateY(20px); /* Turun dikit ke bawah */
+}
+
+.portfolio-item:hover .overlay {
+    opacity: 1;             /* Muncul saat hover */
+    transform: translateY(0); /* Naik ke posisi asal */
+}
+
+.overlay h3 {
     color: white;
-    transform: scale(1.02);
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
 }
 
 /* Footer */
@@ -308,6 +344,49 @@ footer {
     font-size: 12px;
     color: #555;
     background-color: #000;
+}
+
+/* --- PORTFOLIO FILTER --- */
+.portfolio-filter {
+    display: flex;
+    justify-content: center; /* Tombol ada di tengah */
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Agar rapi kalau dibuka di HP */
+}
+
+.filter-btn {
+    border: none;
+    background: transparent;
+    color: #b0b0b0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: 0.3s;
+    border-radius: 20px;
+    border: 1px solid transparent;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    color: #fff;
+    background-color: #00bcd4; /* Warna Biru Cyan saat aktif */
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+}
+
+/* Animasi saat item muncul */
+.portfolio-item.show {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Class untuk menyembunyikan item */
+.portfolio-item.hide {
+    display: none;
 }
 
 /* Responsif Mobile */

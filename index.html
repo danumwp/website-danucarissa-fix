@@ -209,19 +209,101 @@
         </div>
     </section>
 
-    <section id="portfolio" class="section-content">
-        <h2 class="section-title">Portfolio</h2>
+<section id="portfolio" class="section-content">
+        <h2 class="section-title">KULINER</h2>
+        
+        <div class="portfolio-filter">
+            <button class="filter-btn active" onclick="filterPortfolio('all')">All</button>
+            <button class="filter-btn" onclick="filterPortfolio('coffee')">Coffee Shop</button>
+            <button class="filter-btn" onclick="filterPortfolio('bistro')">Bistro</button>
+            <button class="filter-btn" onclick="filterPortfolio('restaurant')">Restaurant</button>
+            <button class="filter-btn" onclick="filterPortfolio('concept')">Concept</button>
+        </div>
+
         <div class="portfolio-grid">
-            <div class="portfolio-item">Project 1</div>
-            <div class="portfolio-item">Project 2</div>
-            <div class="portfolio-item">Project 3</div>
-            <div class="portfolio-item">Project 4</div>
+            
+            <div class="portfolio-item" data-category="coffee">
+                <img src="inifoto/coste1.jpeg" alt="Coste Coffe">
+                <div class="overlay"><h3>Coste Coffe</h3></div>
+            </div>
+
+            <div class="portfolio-item" data-category="bistro">
+                <img src="inifoto/drool1.jpeg" alt="Drool">
+                 <div class="overlay"><h3>Drool</h3></div>
+            </div>
+
+            <div class="portfolio-item" data-category="restaurant">
+                <img src="inifoto/leble1.jpeg" alt="Le Ble">
+                 <div class="overlay"><h3>Le Ble</h3></div>
+            </div>
+
+            <div class="portfolio-item" data-category="coffee">
+                <img src="inifoto/janjiw1.jpeg" alt="Janji Jiwa">
+                 <div class="overlay"><h3>Janji Jiwa</h3></div>
+            </div>
+
+            <div class="portfolio-item" data-category="bistro">
+                <img src="inifoto/fork(1).jpeg" alt="Fork">
+                 <div class="overlay"><h3>Fork</h3></div>
+            </div>
+
+            <div class="portfolio-item" data-category="concept">
+                <img src="inifoto/paddy1.jpeg" alt="Paddy">
+                 <div class="overlay"><h3>Paddy</h3></div>
+            </div>
+
+            <div class="portfolio-item" data-category="concept">
+                <img src="inifoto/samrok1.jpeg" alt="Shamrock">
+                 <div class="overlay"><h3>Shamrock</h3></div>
+            </div>
+
+            <div class="portfolio-item" data-category="concept">
+                <img src="inifoto/mall1.jpeg" alt="Tunjung Plaza">
+                 <div class="overlay"><h3>Tunjungan Plaza</h3></div>
+            </div>
+
+
         </div>
     </section>
 
     <footer>
         <p>&copy; 2025 danucarissa. free copyright.</p>
     </footer>
+
+    <script>
+    // Script Filter Portfolio
+    function filterPortfolio(category) {
+        // 1. Ambil semua item portfolio
+        let items = document.querySelectorAll('.portfolio-item');
+        
+        // 2. Ambil semua tombol filter
+        let buttons = document.querySelectorAll('.filter-btn');
+
+        // 3. Loop: Cek satu per satu item
+        items.forEach(item => {
+            // Jika kategori 'all' ATAU kategori item sama dengan yang diklik
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+                item.classList.remove('hide'); // Hapus class hide
+                item.classList.add('show');    // Tambah class show (biar animasi)
+            } else {
+                item.classList.remove('show'); // Hapus class show
+                item.classList.add('hide');    // Tambah class hide (ilangin)
+            }
+        });
+
+        // 4. Update warna tombol (biar yang aktif warnanya biru)
+        buttons.forEach(btn => {
+            // Hapus class 'active' dari semua tombol dulu
+            btn.classList.remove('active');
+            
+            // Cek apakah tombol ini yang baru saja dipencet?
+            // (Kita cek teks di dalam onclick-nya secara sederhana)
+            if (btn.getAttribute('onclick').includes(category)) {
+                btn.classList.add('active');
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
